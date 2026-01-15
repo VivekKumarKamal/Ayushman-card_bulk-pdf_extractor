@@ -143,6 +143,17 @@ if uploaded_pdfs and st.button("🚀 Start Bulk Extraction"):
     st.success("✅ Extraction Complete!")
     st.warning(f"📂 **File Saved:** `{excel_path}`")
     
+    # --- DOWNLOAD EXCEL FILE ---
+    with open(excel_path, "rb") as f:
+        excel_data = f.read()
+    
+    st.download_button(
+        label="📥 Download Excel File",
+        data=excel_data,
+        file_name=f"IDs_{timestamp}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    
     if os.name == 'nt': # Windows only button
         if st.button("Open Folder"):
             os.startfile(output_folder)
